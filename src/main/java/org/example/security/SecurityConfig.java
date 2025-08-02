@@ -27,7 +27,7 @@ public class SecurityConfig{
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests(auth->auth
                         .antMatchers("/h2-console/**").permitAll()
-                        .antMatchers("/api/auth/**").permitAll()
+                        .antMatchers("/api/auth/**", "/tasks/**").permitAll()
                         .antMatchers("/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .antMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
