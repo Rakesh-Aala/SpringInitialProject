@@ -28,7 +28,7 @@ public class SecurityConfig{
                 .authorizeRequests(auth->auth
                         .antMatchers("/h2-console/**").permitAll()
                         .antMatchers("/api/auth/**").permitAll()
-                        .antMatchers("/swagger-ui/**").permitAll()
+                        .antMatchers("/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .antMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
