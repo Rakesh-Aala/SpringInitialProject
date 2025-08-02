@@ -6,6 +6,8 @@ import org.example.dto.TaskRequestDto;
 import org.example.dto.TaskResponseDto;
 import org.example.mapper.TaskMapper;
 import org.example.service.TaskService;
+import org.springdoc.api.annotations.ParameterObject;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,8 +46,9 @@ public class TaskController {
     }
 
     @GetMapping
+    @PageableAsQueryParam
     public Page<TaskResponseDto> getAllTasks(@RequestParam(required = false)Status status,
-                                             @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+                                             @ParameterObject @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         Page<Task> tasks = (status!=null) ? taskService.getTaskByStatus(status, pageable) : taskService.getAllTasks(pageable);
         return tasks.map(taskMapper::toDTO);
     }
