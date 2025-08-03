@@ -30,6 +30,7 @@ public class SecurityConfig{
                         .antMatchers("/api/auth/**", "/tasks/**").permitAll()
                         .antMatchers("/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .antMatchers("/v3/api-docs/**").permitAll()
+                        .antMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
